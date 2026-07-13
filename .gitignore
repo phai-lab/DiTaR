@@ -1,0 +1,41 @@
+# ---- python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# ---- experiment outputs / runs ----
+outputs/
+exp_local/
+wandb/
+*.log
+runs/
+
+# ---- heavy artifacts: checkpoints you train live outside the repo ----
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.npz
+*.mp4
+*.avi
+*.tfevents*
+ckpt_links/
+
+# ---- datasets (expert demos / real-world); provide locally under <repo>/data/ ----
+# anchored to the repo root so it does NOT match source subpackages like
+# TSEncoder/ditar_encoder/data/.
+/data/
+
+# NOTE: small calibration stats under ours/reward_stats/*.json are intentionally
+# tracked. Do not add a global *.json ignore.
+
+# ---- OS / editor ----
+.DS_Store
+*.swp

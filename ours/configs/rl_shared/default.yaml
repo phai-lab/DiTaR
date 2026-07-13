@@ -1,0 +1,50 @@
+# Shared default config for MetaWorld via the generic
+# ``rl_engine.envs.make_env`` dispatcher.
+# (ManiSkill has its own train script + configs/rl/default.yaml.)
+
+defaults:
+  - _self_
+  - task@_global_: door-v0     # placeholder; override via CLI
+  - agent: drqv2
+  - reward: wan_tc_diffusion
+
+# DrQ-v2 defaults (frame_stack / image_size / update cadence / buffer).
+frame_stack: 1
+image_size: 64
+action_repeat: 2
+discount: 0.99
+
+num_seed_frames: 4000
+update_every_steps: 2
+
+eval_every_frames: 20000
+num_eval_episodes: 10
+
+save_snapshot: true
+use_wandb: false
+
+replay_buffer_size: 1000000
+replay_buffer_num_workers: 2
+nstep: 3
+batch_size: 256
+
+seed: 121
+device: cuda
+save_video: true
+save_train_video: false
+live_view: false
+live_view_fps: 20
+live_view_size: 720
+live_view_mode: side_by_side
+use_tb: true
+
+exp_name: ours_shared
+
+lr: 1e-4
+feature_dim: 50
+
+use_rm: true
+
+hydra:
+  run:
+    dir: ${oc.env:OUTPUT_ROOT,outputs}/rl/${now:%Y.%m.%d}/${task_name}/${reward.rm_model}/${exp_name}_${seed}

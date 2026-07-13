@@ -1,0 +1,46 @@
+DiTaR — Disentangling Task-Relevant Latent Dynamics for Reward Modeling
+Copyright 2026 The DiTaR Authors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+It includes and builds on third-party code, as follows.
+
+--------------------------------------------------------------------------------
+1. rl_engine/ , maniskill_exp/   —   MIT (not Apache-2.0)
+
+   A minimal vendored subset — the DrQ-v2 RL engine (rl_engine/rl/drqv2/), the
+   RND exploration bonus (rl_engine/expl_rewards/), the MetaWorld env factory
+   (rl_engine/envs/) and the ManiSkill env factory (maniskill_exp/) — taken
+   from "Diffusion Reward" (Huang, Jiang, Ze, Xu, 2023),
+   https://github.com/TaoHuang13/diffusion_reward ,
+   used under the MIT License.
+
+   Their original MIT license is preserved verbatim in LICENSE-rl_engine
+   (Copyright (c) 2023 Tao Huang) and continues to govern those files. These
+   packages were promoted to the repository root and renamed away from the
+   upstream project's name; they are NOT the "Diffusion Reward" baseline.
+
+   That project in turn incorporates, among others:
+     - DrQ-v2  (Yarats et al., https://github.com/facebookresearch/drqv2) — MIT
+     - VIPER   (Escontrela et al., https://github.com/Alescontrela/viper_rl) — MIT
+
+   Only the RL engine, RND, and the two env factories are vendored here; the
+   baseline reward models, video-prediction models, and all model-training and
+   expert-data-collection code from the upstream project are NOT included.
+   Modifications to the vendored code are released under the Apache License 2.0.
+
+--------------------------------------------------------------------------------
+2. ours/   —   Apache-2.0 (this work)
+
+   The WAN-TC latent-diffusion reward wrapper (ours/reward_models/) and the
+   DrQ-v2 training / calibration scripts (ours/scripts/).
+
+--------------------------------------------------------------------------------
+3. TSEncoder/   —   the reward model (ditar_encoder)
+
+   The task-relevant encoder + flow-matching latent diffusion, including its
+   full training code. It is imported lazily by ours/reward_models and is an
+   optional runtime dependency of the RL code (see CHECKPOINTS.md).
+
+   It builds on the frozen WAN 2.2 video-model VAE and a T5 text encoder, which
+   are downloaded from HuggingFace at runtime and remain under their own
+   licenses; honour those where their weights or code are redistributed.

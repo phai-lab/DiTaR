@@ -1,0 +1,182 @@
+{
+  "name": "metaworld_v3_language_guided_task_instructions",
+  "version": 1,
+  "notes": [
+    "This file only includes tasks that are suitable or relatively suitable for language-guided learning.",
+    "tier=most_suitable means the task has strong object-level semantics and natural language affordances.",
+    "tier=also_suitable means the task is still usable, but the language is more procedural or manipulation-centric.",
+    "dial-turn-v3 is intentionally excluded here because its semantics are reasonable but the bundled expert policy is brittle in the current MetaWorld installation."
+  ],
+  "tasks": [
+    {
+      "task_name": "door-open-v3",
+      "tier": "most_suitable",
+      "instruction_en": "open the door"
+    },
+    {
+      "task_name": "door-close-v3",
+      "tier": "most_suitable",
+      "instruction_en": "close the door"
+    },
+    {
+      "task_name": "door-lock-v3",
+      "tier": "most_suitable",
+      "instruction_en": "lock the door"
+    },
+    {
+      "task_name": "door-unlock-v3",
+      "tier": "most_suitable",
+      "instruction_en": "unlock the door"
+    },
+    {
+      "task_name": "drawer-open-v3",
+      "tier": "most_suitable",
+      "instruction_en": "open the drawer"
+    },
+    {
+      "task_name": "drawer-close-v3",
+      "tier": "most_suitable",
+      "instruction_en": "close the drawer"
+    },
+    {
+      "task_name": "window-open-v3",
+      "tier": "most_suitable",
+      "instruction_en": "open the window"
+    },
+    {
+      "task_name": "window-close-v3",
+      "tier": "most_suitable",
+      "instruction_en": "close the window"
+    },
+    {
+      "task_name": "faucet-open-v3",
+      "tier": "most_suitable",
+      "instruction_en": "turn on the faucet"
+    },
+    {
+      "task_name": "faucet-close-v3",
+      "tier": "most_suitable",
+      "instruction_en": "turn off the faucet"
+    },
+    {
+      "task_name": "button-press-v3",
+      "tier": "most_suitable",
+      "instruction_en": "press the button"
+    },
+    {
+      "task_name": "button-press-wall-v3",
+      "tier": "most_suitable",
+      "instruction_en": "press the button on the wall"
+    },
+    {
+      "task_name": "button-press-topdown-v3",
+      "tier": "most_suitable",
+      "instruction_en": "press the button from above"
+    },
+    {
+      "task_name": "button-press-topdown-wall-v3",
+      "tier": "most_suitable",
+      "instruction_en": "press the wall button from above"
+    },
+    {
+      "task_name": "lever-pull-v3",
+      "tier": "most_suitable",
+      "instruction_en": "pull the lever"
+    },
+    {
+      "task_name": "handle-pull-v3",
+      "tier": "most_suitable",
+      "instruction_en": "pull the handle"
+    },
+    {
+      "task_name": "handle-pull-side-v3",
+      "tier": "most_suitable",
+      "instruction_en": "pull the side handle"
+    },
+    {
+      "task_name": "handle-press-v3",
+      "tier": "most_suitable",
+      "instruction_en": "press the handle down"
+    },
+    {
+      "task_name": "handle-press-side-v3",
+      "tier": "most_suitable",
+      "instruction_en": "press the side handle"
+    },
+    {
+      "task_name": "box-close-v3",
+      "tier": "most_suitable",
+      "instruction_en": "close the lid of the box"
+    },
+    {
+      "task_name": "assembly-v3",
+      "tier": "also_suitable",
+      "instruction_en": "assemble the nut onto the peg"
+    },
+    {
+      "task_name": "disassemble-v3",
+      "tier": "also_suitable",
+      "instruction_en": "remove the nut from the peg"
+    },
+    {
+      "task_name": "peg-insert-side-v3",
+      "tier": "also_suitable",
+      "instruction_en": "insert the peg into the side hole"
+    },
+    {
+      "task_name": "peg-unplug-side-v3",
+      "tier": "also_suitable",
+      "instruction_en": "pull the peg out of the side hole"
+    },
+    {
+      "task_name": "hand-insert-v3",
+      "tier": "also_suitable",
+      "instruction_en": "insert the object into the hole"
+    },
+    {
+      "task_name": "pick-place-v3",
+      "tier": "also_suitable",
+      "instruction_en": "pick up the object and place it at the target"
+    },
+    {
+      "task_name": "pick-place-wall-v3",
+      "tier": "also_suitable",
+      "instruction_en": "pick up the object and place it at the target behind the wall"
+    },
+    {
+      "task_name": "pick-out-of-hole-v3",
+      "tier": "also_suitable",
+      "instruction_en": "take the object out of the hole"
+    },
+    {
+      "task_name": "bin-picking-v3",
+      "tier": "also_suitable",
+      "instruction_en": "pick the object out of the bin"
+    },
+    {
+      "task_name": "shelf-place-v3",
+      "tier": "also_suitable",
+      "instruction_en": "place the object on the shelf"
+    },
+    {
+      "task_name": "coffee-button-v3",
+      "tier": "also_suitable",
+      "instruction_en": "press the coffee machine button"
+    },
+    {
+      "task_name": "coffee-pull-v3",
+      "tier": "also_suitable",
+      "instruction_en": "pull the mug away from the coffee machine"
+    },
+    {
+      "task_name": "coffee-push-v3",
+      "tier": "also_suitable",
+      "instruction_en": "push the mug under the coffee machine"
+    },
+    {
+      "task_name": "hammer-v3",
+      "tier": "also_suitable",
+      "instruction_en": "use the hammer to drive the nail in"
+    }
+  ]
+}

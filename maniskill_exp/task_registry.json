@@ -1,0 +1,124 @@
+{
+  "LiftPegUpright-v1": {
+    "instruction": "lift the peg upright and place it into the standing pose",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "rl",
+    "notes": "single-arm tabletop demo task"
+  },
+  "PegInsertionSide-v1": {
+    "instruction": "pick up the peg and insert it into the side hole",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "notes": "single-arm tabletop demo task"
+  },
+  "PickCube-v1": {
+    "instruction": "pick up the red cube and move it to the goal position",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "notes": "phase1 smoke task"
+  },
+  "PlugCharger-v1": {
+    "instruction": "grasp the charger and plug it into the socket",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "replay_reward_mode": "sparse",
+    "notes": "single-arm tabletop demo task"
+  },
+  "PokeCube-v1": {
+    "instruction": "poke the cube to move it toward the target region",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "rl",
+    "notes": "single-arm tabletop demo task"
+  },
+  "PullCube-v1": {
+    "instruction": "pull the red cube to the goal region",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "rl",
+    "notes": "phase1 candidate"
+  },
+  "PullCubeTool-v1": {
+    "instruction": "use the tool to pull the cube into the goal region",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "notes": "single-arm tabletop demo task"
+  },
+  "PushCube-v1": {
+    "instruction": "push the red cube to the target marker",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "notes": "phase1 smoke task"
+  },
+  "PushT-v1": {
+    "instruction": "push the T-shaped block to the target pose",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "rl",
+    "notes": "phase1 candidate"
+  },
+  "RollBall-v1": {
+    "instruction": "roll the ball into the target area",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "rl",
+    "notes": "single-arm tabletop demo task"
+  },
+  "StackCube-v1": {
+    "instruction": "stack the red cube on top of the green cube",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "notes": "phase1 smoke task"
+  }
+}

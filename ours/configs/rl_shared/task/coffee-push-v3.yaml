@@ -1,0 +1,5 @@
+domain: metaworld
+task_name: coffee-push-v3
+action_repeat: 3
+num_train_frames: 15000000
+stddev_schedule: 'linear(1.0,0.1,15000000)'

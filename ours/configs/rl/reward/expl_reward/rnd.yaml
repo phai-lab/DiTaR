@@ -1,0 +1,4 @@
+_target_: rl_engine.expl_rewards.rnd.RND
+obs_shape: ???
+action_shape: ???
+device: ${device}

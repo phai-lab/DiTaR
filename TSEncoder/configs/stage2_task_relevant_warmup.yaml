@@ -1,0 +1,134 @@
+model:
+  bottleneck_dim: 32
+  bottleneck_hidden_dim: 128
+  model_dim: 768
+  num_heads: 12
+  enc_blocks: 4
+  dec_blocks: 12
+  bottleneck_regularizer: kl
+  bottleneck_post_norm: true
+  lam_dropout: 0.1
+  target_mode: absolute
+  encoder_arch: queryset_cross_v1
+  decoder_arch: source_query_self_attn_v1
+  query_num_tokens: 4
+  query_blocks: 8
+  kl_scope: target
+  ti_kl_weight: 0.0
+  tc_kl_weight: 1.0e-3
+  tc_kl_warmup_steps: 1500
+  stage_one_ckpt: ${DITAR_STAGE1_CKPT}  # required: Stage-1 ckpt (or pass --model.stage_one_ckpt)
+  log_interval: 10
+  log_path: ./logs
+  optimizer:
+    class_path: torch.optim.AdamW
+    init_args:
+      lr: 5.0e-5
+      weight_decay: 1.0e-2
+  task_name: stage2_t5_multi_v1_1_5frame_ood_tc_bootstrap
+  wan_vae_model_id: Wan-AI/Wan2.2-TI2V-5B-Diffusers
+  wan_vae_model_path: ''
+  wan_vae_subfolder: vae
+  wan_vae_dtype: float32
+  wan_vae_sample_mode: mode
+  wan_vae_normalize_latents: true
+  teacher_input_resolution: 256
+  num_frames: 5
+  max_decoder_text_tokens: 64
+  separate_tc_encoder: true
+  init_tc_from_ti: true
+  tc_bootstrap_freeze: true
+  ti_decoder_dropout_p: 1.0
+  freeze_ti_branch: true
+  use_wandb: false
+
+data:
+  manifests:
+    - name: agibot
+      data_root: ${DITAR_DATA_ROOT}/data/agibot_beta_threeview_320
+      data_format: agibot_hdf5
+      h5_root: ${DITAR_DATA_ROOT}/data/agibot_beta_threeview_320/extracted_jpeg_h5
+      manifest_path: manifest.jsonl
+      video_key: head_color.mp4
+      extract_stride: 2
+      sample_weight: 0.38
+      chunk_stride: 4
+      stride_choices: [1, 2, 3, 4]
+      stride_probs: [0.10, 0.10, 0.10, 0.70]
+      eval_chunk_stride: 4
+    - name: droid
+      data_root: ${DITAR_DATA_ROOT}/data/droid
+      data_format: hdf5
+      episode_root: ${DITAR_DATA_ROOT}/data/droid/hdf5_processed_orisize
+      sample_weight: 0.38
+      chunk_stride: 4
+      stride_choices: [1, 2, 3, 4]
+      stride_probs: [0.10, 0.10, 0.10, 0.70]
+      eval_chunk_stride: 4
+      min_frame_count: 17
+    - name: bridge
+      data_root: ${DITAR_DATA_ROOT}/data/bridge_multiview/extracted_jpeg_h5
+      data_format: hdf5
+      episode_root: ${DITAR_DATA_ROOT}/data/bridge_multiview/extracted_jpeg_h5
+      sample_weight: 0.19
+      chunk_stride: 3
+      stride_choices: [1, 2, 3]
+      stride_probs: [0.15, 0.15, 0.70]
+      eval_chunk_stride: 3
+      min_frame_count: 13
+    - name: metaworldv3
+      data_root: ${DITAR_DATA_ROOT}/data/metaworldv3
+      data_format: hdf5
+      episode_root: ${DITAR_DATA_ROOT}/data/metaworldv3/hdf5_processed_video_256
+      sample_weight: 0.025
+      chunk_stride: 2
+      stride_choices: [1, 2]
+      stride_probs: [0.30, 0.70]
+      eval_chunk_stride: 2
+      min_frame_count: 9
+    - name: maniskill
+      data_root: ${DITAR_DATA_ROOT}/data/maniskill
+      data_format: hdf5
+      episode_root: ${DITAR_DATA_ROOT}/data/maniskill/hdf5_processed_left_camera_256
+      sample_weight: 0.025
+      chunk_stride: 1
+      min_frame_count: 5
+  batch_size: 2
+  resolution: 256
+  num_frames: 5
+  chunk_stride: 4
+  split_ratio: 0.98
+  image_aug: false
+  num_workers: 4
+  min_frame_count: 0
+  seed: 42
+
+trainer:
+  max_epochs: 20
+  accelerator: gpu
+  num_nodes: 1
+  devices: 1
+  strategy: auto
+  precision: 16-mixed
+  log_every_n_steps: 10
+  gradient_clip_val: 1.0
+  use_distributed_sampler: false
+  callbacks:
+    - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+      init_args:
+        dirpath: ./logs/stage2_t5_multi_v1_1_5frame_ood_tc_bootstrap
+        verbose: true
+        save_last: true
+        monitor: val_loss
+        mode: min
+        filename: best-step={step:08d}-val_loss={val_loss:.6f}
+        auto_insert_metric_name: false
+        save_top_k: 1
+        every_n_train_steps: null
+        every_n_epochs: null
+        train_time_interval: null
+  logger:
+    - class_path: lightning.pytorch.loggers.TensorBoardLogger
+      init_args:
+        save_dir: ./logs
+        name: stage2_t5_multi_v1_1_5frame_ood_tc_bootstrap

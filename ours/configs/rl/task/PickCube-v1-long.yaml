@@ -1,0 +1,5 @@
+domain: maniskill
+task_name: PickCube-v1
+action_repeat: 1
+num_train_frames: 3000000
+stddev_schedule: 'linear(1.0,0.02,2400000)'

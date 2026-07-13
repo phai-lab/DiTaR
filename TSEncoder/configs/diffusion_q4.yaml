@@ -1,0 +1,139 @@
+model:
+  model_dim: 512
+  num_heads: 8
+  dit_blocks: 12
+  source_tokens: 512
+  target_tokens: 4
+  source_dim: 48
+  target_dim: 32
+  text_dim: 768
+  dropout: 0.0
+  text_gate_init: 0.0
+  t_min: 1.0e-4
+  text_drop_p: 0.15
+  source_token_drop_p: 0.0
+  sampling_steps: 16
+  guidance_scale: 1.0
+  tc_target_mode: first
+  source_mode: history_5frame_wan2
+  history_num_frames: 5
+  text_mode: in_joint_attn
+  stage2_checkpoint: ${DITAR_STAGE2_CKPT}
+  wan_vae_model_path: ''
+  t5_model_id: t5-base
+  t5_model_path: ''
+  t5_max_length: 64
+  text_cache_size: 4096
+  target_stats_path: configs/stats/q4_stats.json
+  source_stats_path: configs/stats/q4_stats.json
+  latent_scale_divisor: 2.0
+  log_interval: 10
+  log_path: ./logs
+  task_name: wan_tc_latent_diffusion_q4_5frame_history_textjoint_online_8gpu
+  optimizer:
+    class_path: torch.optim.AdamW
+    init_args:
+      lr: 1.0e-4
+      weight_decay: 1.0e-2
+  use_wandb: false
+
+data:
+  manifests:
+    - name: agibot
+      data_root: ${DITAR_DATA_ROOT}/data/agibot_beta_threeview_320
+      data_format: agibot_hdf5
+      h5_root: ${DITAR_DATA_ROOT}/data/agibot_beta_threeview_320/extracted_jpeg_h5
+      manifest_path: manifest.jsonl
+      video_key: head_color.mp4
+      extract_stride: 2
+      sample_weight: 0.38
+      chunk_stride: 4
+      stride_choices: [1, 2, 3, 4]
+      stride_probs: [0.10, 0.10, 0.10, 0.70]
+      eval_chunk_stride: 4
+    - name: droid
+      data_root: ${DITAR_DATA_ROOT}/data/droid
+      data_format: hdf5
+      episode_root: ${DITAR_DATA_ROOT}/data/droid/hdf5_processed_orisize
+      sample_weight: 0.38
+      chunk_stride: 4
+      stride_choices: [1, 2, 3, 4]
+      stride_probs: [0.10, 0.10, 0.10, 0.70]
+      eval_chunk_stride: 4
+    - name: bridge
+      data_root: ${DITAR_DATA_ROOT}/data/bridge_multiview/extracted_jpeg_h5
+      data_format: hdf5
+      episode_root: ${DITAR_DATA_ROOT}/data/bridge_multiview/extracted_jpeg_h5
+      sample_weight: 0.19
+      chunk_stride: 3
+      stride_choices: [1, 2, 3]
+      stride_probs: [0.15, 0.15, 0.70]
+      eval_chunk_stride: 3
+    - name: metaworldv3
+      data_root: ${DITAR_DATA_ROOT}/data/metaworldv3
+      data_format: hdf5
+      episode_root: ${DITAR_DATA_ROOT}/data/metaworldv3/hdf5_processed_video_256
+      sample_weight: 0.025
+      chunk_stride: 2
+      stride_choices: [1, 2]
+      stride_probs: [0.30, 0.70]
+      eval_chunk_stride: 2
+    - name: maniskill
+      data_root: ${DITAR_DATA_ROOT}/data/maniskill
+      data_format: hdf5
+      episode_root: ${DITAR_DATA_ROOT}/data/maniskill/hdf5_processed_left_camera_256
+      sample_weight: 0.025
+      chunk_stride: 1
+  batch_size: 48
+  val_batch_size: 48
+  resolution: 256
+  num_frames: 9
+  chunk_stride: 4
+  split_ratio: 0.98
+  image_aug: false
+  num_workers: 4
+  min_frame_count: 0
+  seed: 42
+
+trainer:
+  max_epochs: 1000
+  max_steps: 1000000
+  accelerator: gpu
+  num_nodes: 1
+  devices: 8
+  strategy: ddp_find_unused_parameters_false
+  precision: 16-mixed
+  log_every_n_steps: 10
+  val_check_interval: 1000
+  check_val_every_n_epoch: null
+  gradient_clip_val: 1.0
+  use_distributed_sampler: false
+  callbacks:
+    - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+      init_args:
+        dirpath: ./logs/wan_tc_latent_diffusion_q4_5frame_history_textjoint_online_8gpu/checkpoints
+        verbose: true
+        save_last: false
+        monitor: val_loss
+        mode: min
+        save_top_k: 3
+        filename: top3-step={step:08d}-val_loss={val_loss:.6f}
+        auto_insert_metric_name: false
+    - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+      init_args:
+        dirpath: ./logs/wan_tc_latent_diffusion_q4_5frame_history_textjoint_online_8gpu/checkpoints
+        verbose: true
+        save_last: true
+        filename: recent-step={step:08d}
+        save_top_k: -1
+        every_n_train_steps: 2000
+        auto_insert_metric_name: false
+  logger:
+    - class_path: lightning.pytorch.loggers.TensorBoardLogger
+      init_args:
+        save_dir: ./logs
+        name: wan_tc_latent_diffusion_q4_5frame_history_textjoint_online_8gpu
+    # Weights & Biases is opt-in (keeps the default install free of a `wandb` dependency).
+    # To enable: `pip install wandb` and append, e.g.:
+    #   - class_path: lightning.pytorch.loggers.WandbLogger
+    #     init_args: {save_dir: ./logs, project: ditar, name: wan_tc_latent_diffusion_q4}

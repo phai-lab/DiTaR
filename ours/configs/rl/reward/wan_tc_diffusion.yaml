@@ -1,0 +1,91 @@
+defaults:
+  - _self_
+  - expl_reward: rnd
+
+# task info (filled at runtime by training script)
+task_name: ${task_name}
+obs_shape: ???
+action_shape: ???
+
+# Reward-model registry key consumed by ours.reward_models.make_rm.
+rm_model: wan_tc_diffusion
+pretrain_rm: true   # frozen; consumed by Workspace.__init__ for the RM-pretrain skip path.
+
+# q4 5-frame TC diffusion (variant t2: history_5frame_wan2 source +
+# cross_attn_target_only text). Paths verified locally on 2026-05-15.
+# See docs/tmp/2026-05-13-TC_diffusion/tc_encoder_and_denoise_notes.md.
+ckpt_path: ${oc.env:WAN_TC_CKPT}
+# Frozen TC teacher (stage-2) used by the diffusion; override the absolute
+# path baked into the diffusion ckpt hparams.
+stage2_ckpt_path: ${oc.env:WAN_TC_STAGE2_CKPT,''}
+taskvae_root: ${oc.env:TASKVAE_ROOT,''}
+hf_hub_root: ${oc.env:HUGGINGFACE_HUB_CACHE,''}
+wan_vae_path: ${oc.env:WAN_VAE_PATH,'Wan-AI/Wan2.2-TI2V-5B-Diffusers'}
+t5_path: ${oc.env:T5_PATH,'t5-base'}
+# t2-specific stats: target shape [4, 32] (q4), source shape [512, 48]
+# (5-frame history reshaped from [B, 2, 256, 48]).
+stats_path: ${oc.env:WAN_TC_STATS,''}
+
+# Reward semantics.
+# Reward variant.
+# 推荐两个主选项：
+#   exp          -> r_t = exp(-E_t)        ∈ (0, 1], 正值 manifold shaping (default)
+#   td_residual  -> r_t = E_{t-1} - E_t    "native" PBRS, 奖励 residual 下降, 可正可负
+# 备选：
+#   neg_e        -> r_t = -E_t              raw, 严格 ≤ 0
+#   td_exp       -> r_t = exp(-E_t) - exp(-E_{t-1})  TD 版有界差分
+reward_type: exp
+# K=2 paired-MC samples (was 4). Halves the diffusion forwards per episode
+# (reward compute is the FPS bottleneck during RL training); the extra
+# per-step E_t variance is absorbed by z-score normalization and the RL
+# critic's own smoothing.
+mc_samples: 2
+tau_min: 1.0e-2
+tau_max: 1.0
+td_scale: 1.0
+internal_batch_size: 8
+default_instruction: ""
+
+# Window stride between adjacent frames inside one reward window. RL default is
+# stride=1: the 9-frame t2 window covers 8 env steps of history/future centred
+# at the current step. Larger strides match training augmentation but cost more
+# padding per step (short MetaWorld episodes amplify the cost).
+stride: 1
+
+# TD differencing gap. Because stride=1 leaves adjacent windows overlapping
+# 8/9 frames, k=1 produces near-zero residuals. k=4 differences across ~4 env
+# steps so the TD signal has meaningful magnitude.
+td_step_gap: 4
+
+# Demo-based z-score normalization. The stats file is produced by
+# ours/scripts/calibrate_reward_stats.py and stores (mean, std) per reward_type
+# computed from expert demos. The wrapper outputs ``(r - μ) / σ``; if the file
+# is missing it falls back silently to identity.
+normalize_reward: true
+reward_stats_path: ${oc.env:OURS_ROOT}/reward_stats/maniskill.json
+# Schema-v2 stats files contain demo/mixed sub-branches per variant.
+# stats_mode picks which to read. "demo" = expert-only calibration (default);
+# "mixed" = expert + random rollouts (placeholder; requires generating).
+stats_mode: demo
+
+# Reward composition (after wrapper output):
+#     r_t = learned_scale * r_learned_normalized(t)
+#         + r_env(t)
+#         + expl_scale     * r_rnd(t)
+# where the env adds in replay_buffer.pop() and RND adds in agent.update().
+# User-chosen split: 0.95 learned + 0.05 rnd; env reward is layered on top
+# (sparse for MetaWorld, dense for ManiSkill — wrapper side never
+# touches the env reward).
+use_expl_reward: true
+expl_reward: ${expl_reward}
+expl_lr: ${lr}
+expl_scale: 0.05
+expl_std: true
+expl_update_interval: 1    # RND update cadence (1 = every step). 100 was too slow for MS/MW convergence.
+learned_scale: 0.95
+
+# Tier-A: when true, post-z reward = max(z, 0). Removes the negative penalty
+# that demo-only z-score gives to RL trajectories. Use for hard tasks.
+reward_nonneg: false
+
+use_env_reward: true

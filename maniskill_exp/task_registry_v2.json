@@ -1,0 +1,124 @@
+{
+  "LiftPegUpright-v1": {
+    "instruction": "grasp the red-and-blue peg lying flat on the table, lift it, and stand it upright on one end",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "rl",
+    "notes": "single-arm tabletop demo task"
+  },
+  "PegInsertionSide-v1": {
+    "instruction": "grasp the orange-and-white peg, align its orange tip with the square side hole in the tan box, and insert the peg into the hole",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "notes": "single-arm tabletop demo task"
+  },
+  "PickCube-v1": {
+    "instruction": "pick up the red cube and move it to the visible green spherical goal marker above the table",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "notes": "phase1 smoke task"
+  },
+  "PlugCharger-v1": {
+    "instruction": "grasp the white charger plug, align its two prongs with the white receptacle slot, and insert the charger into the socket",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "replay_reward_mode": "sparse",
+    "notes": "single-arm tabletop demo task"
+  },
+  "PokeCube-v1": {
+    "instruction": "grasp the blue peg, use its tip to poke the red cube, and push the cube into the red-and-white circular target",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "rl",
+    "notes": "single-arm tabletop demo task"
+  },
+  "PullCube-v1": {
+    "instruction": "pull the blue cube backward until it sits inside the red-and-white circular target on the table",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "rl",
+    "notes": "phase1 candidate"
+  },
+  "PullCubeTool-v1": {
+    "instruction": "grasp the red L-shaped tool, hook it behind the small blue cube, and pull the cube back into the robot's reachable workspace",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "notes": "single-arm tabletop demo task"
+  },
+  "PushCube-v1": {
+    "instruction": "push the blue cube across the table until it reaches the red-and-white circular target",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "notes": "phase1 smoke task"
+  },
+  "PushT-v1": {
+    "instruction": "use the stick end-effector to push the red T-shaped block until it overlaps the gray T-shaped target pose",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "rl",
+    "notes": "phase1 candidate"
+  },
+  "RollBall-v1": {
+    "instruction": "push and roll the blue ball across the table into the red-and-white circular target area",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "rl",
+    "notes": "single-arm tabletop demo task"
+  },
+  "StackCube-v1": {
+    "instruction": "pick up the red cube, place it directly on top of the green cube, and release it so the stack remains stable",
+    "camera_names": [
+      "left_camera",
+      "right_camera"
+    ],
+    "has_dense_reward": true,
+    "has_demos": true,
+    "preferred_demo_source": "motionplanning",
+    "notes": "phase1 smoke task"
+  }
+}

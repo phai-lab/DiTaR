@@ -1,0 +1,27 @@
+# Core DrQ-v2 RL engine + training loop (this repo).
+torch
+numpy
+hydra-core>=1.1
+omegaconf>=2.1
+opencv-python
+imageio
+imageio-ffmpeg
+dm-env
+gym
+gymnasium
+wandb
+tensorboard
+tqdm
+
+# ---------------------------------------------------------------------------
+# Simulators (install the one(s) you need; NOT pip-trivial / platform-specific):
+#   MetaWorld  -> metaworld + mujoco
+#   ManiSkill  -> mani_skill (>=3.0) + sapien
+# See INSTALL.md for per-benchmark setup.
+#
+# Learned reward model (OPTIONAL): the WAN-TC `diffusion` package is released
+# separately (see CHECKPOINTS.md). It additionally needs, roughly:
+#   diffusers==0.37.1  transformers  lightning  einops
+#   rotary-embedding-torch  sentencepiece  safetensors  huggingface_hub
+# Importing/running this RL repo with a stub reward does NOT require them.
+# ---------------------------------------------------------------------------
