@@ -1,9 +1,35 @@
-# DiTaR
+<h1 align="center">
+  <a href="https://ditarr.github.io/">DiTaR: Disentangling Task-Relevant Latent Dynamics for Reward Modeling</a>
+</h1>
 
-### Disentangling Task-Relevant Latent Dynamics for Reward Modeling
+<p align="center">
+  Dayou Li<sup>1,*</sup>, Jionghao Wang<sup>1,*</sup>, Peihao Wang<sup>2</sup>, Jiuzhou Lei<sup>1</sup>,
+  Hao Wang<sup>1</sup>, Jichen Chai<sup>3</sup>, Hezhen Hu<sup>2</sup>, Minghui Zheng<sup>1</sup>,
+  Zhangyang Wang<sup>2</sup>, Xin Li<sup>1</sup>, Wenping Wang<sup>1</sup>, Zhiwen Fan<sup>1,†</sup>
+  <br>
+  <sup>1</sup>Texas A&amp;M University &nbsp; <sup>2</sup>The University of Texas at Austin &nbsp; <sup>3</sup>Georgia Institute of Technology
+  <br>
+  <sup>*</sup>Equal contribution &nbsp; <sup>†</sup>Corresponding author
+</p>
 
-Dayou Li, Jionghao Wang, Peihao Wang, Jiuzhou Lei, Hao Wang, Hezhen Hu,
-Minghui Zheng, Zhangyang Wang, Xin Li, Wenping Wang, Zhiwen Fan
+<p align="center">
+  <img src="https://img.shields.io/badge/Paper-Coming%20Soon-B31B1B?logo=arxiv&logoColor=white" alt="Paper: coming soon">
+  <a href="https://ditarr.github.io/"><img src="https://img.shields.io/badge/Project-Website-5B9A30" alt="Project website"></a>
+</p>
+
+<p align="center">
+  This repository is the official code release for DiTaR, which turns action-free videos into dense
+  rewards for robot reinforcement learning. It separates task-relevant dynamics from visual variation,
+  so rewards stay stable under lighting and camera changes, yet respond when the execution is disrupted.
+</p>
+
+<p align="center"><b>The idea in 30 seconds</b></p>
+
+<p align="center">
+  <a href="https://ditarr.github.io/">
+    <img src="assets/teaser.gif" width="100%" alt="DiTaR in 30 seconds: dense rewards from video through task-relevant dynamics, recognizing task progress, and policy learning results">
+  </a>
+</p>
 
 ---
 
