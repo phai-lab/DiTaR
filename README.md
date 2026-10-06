@@ -18,15 +18,15 @@
 </p>
 
 <p align="center">
-  This repository is the official code release for DiTaR, which turns action-free videos into dense
-  rewards for robot reinforcement learning. It separates task-relevant dynamics from visual variation,
-  so rewards stay stable under lighting and camera changes, yet respond when the execution is disrupted.
-</p>
-
-<p align="center">
   <a href="https://ditarr.github.io/">
     <img src="assets/teaser.gif" width="100%" alt="DiTaR in 30 seconds: dense rewards from video through task-relevant dynamics, recognizing task progress, and policy learning results">
   </a>
+</p>
+
+<p align="center">
+  This repository is the official code release for DiTaR, which turns action-free videos into dense
+  rewards for robot reinforcement learning. It separates task-relevant dynamics from visual variation,
+  so rewards stay stable under lighting and camera changes, yet respond when the execution is disrupted.
 </p>
 
 ---
