@@ -167,6 +167,22 @@ Paths are not hard-coded; configs read them via `${oc.env:...}`:
 | `WAN_VAE_PATH` / `T5_PATH` | VAE / T5 (default: HF repo ids, auto-downloaded) |
 | `HF_HOME` | HuggingFace cache (default `~/.cache/huggingface`) |
 
+## Citation
+
+If you find DiTaR useful, please cite:
+
+```bibtex
+@misc{li2026disentanglingtaskrelevantlatentdynamics,
+      title={Disentangling Task-Relevant Latent Dynamics for Reward Modeling}, 
+      author={Dayou Li and Jionghao Wang and Peihao Wang and Jiuzhou Lei and Hao Wang and Jichen Chai and Hezhen Hu and Minghui Zheng and Zhangyang Wang and Xin Li and Wenping Wang and Zhiwen Fan},
+      year={2026},
+      eprint={2610.14159},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2610.14159}, 
+}
+```
+
 ## License
 
 Apache-2.0 — see [`LICENSE`](LICENSE) and [`NOTICE`](NOTICE).
