@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Paper-Coming%20Soon-B31B1B?logo=arxiv&logoColor=white" alt="Paper: coming soon">
+  <a href="https://arxiv.org/abs/2610.14159"><img src="https://img.shields.io/badge/arXiv-2610.14159-B31B1B?logo=arxiv&logoColor=white" alt="arXiv 2610.14159"></a>
   <a href="https://ditarr.github.io/"><img src="https://img.shields.io/badge/Project-Website-5B9A30" alt="Project website"></a>
 </p>
 
