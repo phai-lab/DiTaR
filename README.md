@@ -1,5 +1,24 @@
 <h2 align="center"> <a href="https://arxiv.org/abs/2610.14159">DiTaR: Disentangling Task-Relevant Latent Dynamics for Reward Modeling</a></h2>
 
+<p align="center">
+  <a href="https://edisiondyli.github.io/">Dayou Li</a><sup>1,*</sup>,
+  <a href="https://shanemankiw.github.io/">Jionghao Wang</a><sup>1,*</sup>,
+  <a href="https://peihaowang.github.io/">Peihao Wang</a><sup>2</sup>,
+  <a href="https://scholar.google.com/citations?user=X52xke0AAAAJ">Jiuzhou Lei</a><sup>1</sup>,
+  <a href="https://haohww.github.io/">Hao Wang</a><sup>1</sup>,
+  Jichen Chai<sup>3</sup>,
+  <a href="https://alexhu.top/">Hezhen Hu</a><sup>2</sup>,
+  <a href="https://engineering.tamu.edu/mechanical/profiles/zheng-minghui.html">Minghui Zheng</a><sup>1</sup>,
+  <a href="https://www.vita-group.space/pi">Zhangyang Wang</a><sup>2</sup>,
+  <a href="https://people.tamu.edu/~xinli/">Xin Li</a><sup>1</sup>,
+  <a href="https://engineering.tamu.edu/cse/profiles/Wang-Wenping.html">Wenping Wang</a><sup>1</sup>,
+  <a href="https://zhiwenfan.github.io/">Zhiwen Fan</a><sup>1,†</sup>
+  <br>
+  <sup>1</sup>Texas A&amp;M University &nbsp; <sup>2</sup>The University of Texas at Austin &nbsp; <sup>3</sup>Georgia Institute of Technology
+  <br>
+  <sup>*</sup>Equal contribution &nbsp; <sup>†</sup>Corresponding author
+</p>
+
 <h5 align="center">
 
 [![arXiv](https://img.shields.io/badge/Arxiv-2610.14159-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2610.14159)
